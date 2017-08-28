@@ -1,0 +1,10 @@
+{
+  "name": "webpack-v3-tutorial",
+  "version": "1.0.0",
+  "devDependencies": {
+    "webpack": "^3.5.5"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1"
+  }
+}
