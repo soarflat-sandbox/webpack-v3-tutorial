@@ -2,6 +2,9 @@
   "name": "webpack-v3-tutorial",
   "version": "1.0.0",
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.1.1",
+    "babel-preset-env": "^1.6.0",
     "webpack": "^3.5.5"
   },
   "dependencies": {

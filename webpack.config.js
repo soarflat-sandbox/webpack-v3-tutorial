@@ -1,5 +1,5 @@
 // UglifyJsPluginなどのプラグインを利用するためにwebpackを読み込んでおく必要がある。
-// var webpack = require('webpack');
+const webpack = require('webpack');
 
 // output.pathに絶対パスを指定する必要があるため、pathモジュールを読み込んでおく
 const path = require('path');
@@ -15,27 +15,31 @@ module.exports = {
     path: path.join(__dirname, 'public/js')
   },
   // ローダーの設定
-  // module: {
-  //   loaders: [{
-  //     // ローダーの処理対象ファイル
-  //     test: /\.js$/,
-  //     // ローダーの処理対象から外すディレクトリ
-  //     exclude: /node_modules/,
-  //     // 利用するローダー
-  //     loader: 'babel-loader?presets[]=es2015'
-  //   }]
-  // },
+  module: {
+    rules: [{
+      // ローダーの処理対象ファイル
+      test: /\.js$/,
+      // ローダーの処理対象から外すディレクトリ
+      exclude: /node_modules/,
+      // 利用するローダー
+      use: [{
+        loader: 'babel-loader?presets[]=env'
+      }],
+
+      // ↑のローダーを利用する記述は以下のように書いても同じ処理になる
+      // use: [{
+      //   loader: 'babel-loader',
+      //   options: {
+      //     presets: ['env']
+      //   }
+      // }],
+    }],
+  },
   // プラグインの設定
-  // plugins: [
-  //   new webpack.optimize.UglifyJsPlugin({
-  //     // 圧縮に関する設定
-  //     compress: {
-  //       // 警告を出力するかどうか
-  //       warnings: false,
-  //     }
-  //   }),
-  //   new webpack.ProvidePlugin({
-  //     $: 'jquery'
-  //   })
-  // ]
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery'
+    })
+  ]
 };
