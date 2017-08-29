@@ -16,29 +16,27 @@ module.exports = {
   },
   // ローダーの設定
   module: {
-    // babelでコンパイルするまえにeslintで構文チェックをしたいため
-    // babel-loaderの記述より前にeslint-loaderの記述を書く。
     rules: [{
-      enforce: 'pre',
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'eslint-loader',
-    }, {
       // ローダーの処理対象ファイル
       test: /\.js$/,
       // ローダーの処理対象から外すディレクトリ
       exclude: /node_modules/,
-      // 利用するローダー
       use: [{
+        // 利用するローダー
         loader: 'babel-loader',
+        // ローダーのオプション
         options: {
           presets: ['env']
         }
       }],
-      // ↑のローダーを利用する記述は以下のように書いても同じ処理になる
-      // use: [{
-      //   loader: 'babel-loader?presets[]=env'
-      // }],
+    }, {
+      // enforce: 'pre'を指定することによって
+      // enforce: 'pre'がついていないローダーより早く処理が実行される
+      // 今回はbabel-loaderでトランスパイルする前にESLintで構文チェックをしたいため、指定が必要
+      enforce: 'pre',
+      test: /\.js$/,
+      exclude: /node_modules/,
+      loader: 'eslint-loader',
     }],
   },
   // プラグインの設定
