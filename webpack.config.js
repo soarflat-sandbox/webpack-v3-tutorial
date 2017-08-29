@@ -41,9 +41,13 @@ module.exports = {
   },
   // プラグインの設定
   plugins: [
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        drop_console: true
+      },
+    }),
     new webpack.ProvidePlugin({
       $: 'jquery'
-    })
-  ]
+    }),
+  ],
 };
