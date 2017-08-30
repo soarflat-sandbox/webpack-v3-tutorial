@@ -32,7 +32,7 @@ module.exports = {
     }, {
       // enforce: 'pre'を指定することによって
       // enforce: 'pre'がついていないローダーより早く処理が実行される
-      // 今回はbabel-loaderでトランスパイルする前にESLintで構文チェックをしたいため、指定が必要
+      // 今回はbabel-loaderで変換する前にコードをチェックしたいため、指定が必要
       enforce: 'pre',
       test: /\.js$/,
       exclude: /node_modules/,
@@ -43,6 +43,7 @@ module.exports = {
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
       compress: {
+        // console.log（）などのconsole.*系の記述を取り除いて出力する
         drop_console: true
       },
     }),
